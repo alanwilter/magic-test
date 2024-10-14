@@ -13,10 +13,10 @@ class ExerciseRepCounterImpl : ExerciseRepCounter() {
     private var currentProgress = 0f
 
     companion object {
-        private const val TARGET_ANGLE = 90f
-        private const val ANGLE_TOLERANCE = 21f // after looking the notebook
-        private const val PROGRESS_SMOOTHING_FACTOR = 0.7f
-        private const val MAX_PROGRESS = 1f
+        internal const val TARGET_ANGLE = 90f
+        internal const val ANGLE_TOLERANCE = 21f // after looking the notebook
+        internal const val PROGRESS_SMOOTHING_FACTOR = 0.7f
+        internal const val MAX_PROGRESS = 1f
     }
 
     override fun setResults(resultBundle: PoseLandmarkerHelper.ResultBundle) {
@@ -70,7 +70,7 @@ class ExerciseRepCounterImpl : ExerciseRepCounter() {
         )
     }
 
-    private fun calculateAngle(
+    internal fun calculateAngle(
             first: NormalizedLandmark,
             middle: NormalizedLandmark,
             last: NormalizedLandmark
@@ -88,12 +88,12 @@ class ExerciseRepCounterImpl : ExerciseRepCounter() {
         return abs(if (angle < 0) angle + 360 else angle)
     }
 
-    private fun isLungePosition(shoulderHipKneeAngle: Float, hipKneeAnkleAngle: Float): Boolean {
+    internal fun isLungePosition(shoulderHipKneeAngle: Float, hipKneeAnkleAngle: Float): Boolean {
         return abs(shoulderHipKneeAngle - TARGET_ANGLE) < ANGLE_TOLERANCE &&
                 abs(hipKneeAnkleAngle - TARGET_ANGLE) < ANGLE_TOLERANCE
     }
 
-    private fun calculateProgress(angle: Float): Float {
+    internal fun calculateProgress(angle: Float): Float {
         return maxOf(
                 0f,
                 minOf(
